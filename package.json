@@ -1,0 +1,22 @@
+{
+  "name": "website-nodejs-express",
+  "version": "1.0.0",
+  "description": "https://www.linkedin.com/learning/building-a-website-with-node-js-and-express-js-3",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Ihar Sakun",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.3.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.5.0"
+  }
+}
