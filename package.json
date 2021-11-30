@@ -4,11 +4,13 @@
   "description": "https://www.linkedin.com/learning/building-a-website-with-node-js-and-express-js-3",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon --ignore feedback.json server.js"
   },
   "author": "Ihar Sakun",
   "license": "ISC",
   "dependencies": {
+    "ejs": "^3.1.6",
     "express": "^4.17.1"
   },
   "devDependencies": {
@@ -17,6 +19,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-prettier": "^4.0.0",
+    "nodemon": "^2.0.15",
     "prettier": "^2.5.0"
   }
 }
