@@ -6,9 +6,12 @@ const feedbackRoute = require('./feedback');
 const router = express.Router();
 
 module.exports = params => {
+    const { speakersService } = params;
 
     router.get('/', async (request, response) => {
-        response.render('layout', { pageTitle: 'Welcome', template:'index' });
+        const topSpeakers = await speakersService.getList();
+        console.log(topSpeakers);
+        response.render('layout', { pageTitle: 'Welcome', template: 'index', topSpeakers });
     });
 
     router.use('/speakers', spaekersRoute(params));
