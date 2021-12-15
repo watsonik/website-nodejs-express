@@ -12,9 +12,10 @@ module.exports = (params) => {
             const feedback = await feedbackService.getList();
 
             const errors = request.session.feedback ? request.session.feedback.errors : false;
+            const successMessage = request.session.feedback ? request.session.feedback.message : false;
             request.session.feedback = {};
 
-            return response.render('layout', { pageTitle: 'Feedback', template: 'feedback', feedback, errors });
+            return response.render('layout', { pageTitle: 'Feedback', template: 'feedback', feedback, errors, successMessage });
         } catch (error) {
             return next(error);
         }
@@ -43,16 +44,24 @@ module.exports = (params) => {
             .escape()
             .withMessage('A message is requierd'),
 
-    ], (request, response) => {
-        const errors = validationResult(request);
-        if (!errors.isEmpty()) {
+    ],
+        async (request, response) => {
+            const errors = validationResult(request);
+            if (!errors.isEmpty()) {
+                request.session.feedback = {
+                    errors: errors.array(),
+                };
+                return response.redirect('/feedback');
+            }
+
+            const { name, email, title, message } = request.body;
+            await feedbackService.addEntry(name, email, title, message);
             request.session.feedback = {
-                errors: errors.array(),
-            };
+                message: 'Thank you for your feedback',
+            }
+
             return response.redirect('/feedback');
-        }
-        return response.send('Feedback form posted');
-    });
+        });
 
     return router;
 };
